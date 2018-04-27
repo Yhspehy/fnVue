@@ -1,7 +1,9 @@
+/* 基本引用的是webpack-cli的模板，并在此基础上做了部分补充 */
 const webpack = require('webpack')
 const path = require('path')
 const utils = require('./utils')
 
+/* 压缩代码的插件 */
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
@@ -14,8 +16,7 @@ module.exports = {
         path: path.resolve(__dirname, '../dist')
     },
     resolve: {
-        extensions: ['.js', '.vue', '.json'],
-        alias: {}
+        extensions: ['.js', '.vue', '.json']
     },
     module: {
         rules: [

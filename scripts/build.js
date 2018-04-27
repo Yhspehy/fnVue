@@ -24,12 +24,11 @@ const buildWebpackConfig = merge(baseWebpackConfig, {
     ]
 })
 
-// module.exports = buildWebpackConfig
-
 module.exports = new Promise((resolve, reject) => {
     const spinner = ora('building for production...')
     spinner.start()
 
+    // 删除原本的dist目录下的文件
     rm(path.join(config.build.assetsRoot), err => {
         if (err) throw err
         resolve(buildWebpackConfig)

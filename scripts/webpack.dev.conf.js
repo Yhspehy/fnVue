@@ -15,12 +15,12 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     devtool: config.dev.devtool,
     devServer: {
         clientLogLevel: 'warning',
-        hot: true,
-        compress: true,
+        hot: true, // 启动热加载
+        compress: true, // 启动gzip压缩
         host: HOST || config.dev.host,
         port: PORT || config.dev.port,
         open: config.dev.autoOpenBrowser,
-        quiet: true,
+        quiet: true, // 初始启动信息之外的任何内容都不会被打印到控制台
         overlay: config.dev.errorOverlay
             ? {
                   warnings: false,
