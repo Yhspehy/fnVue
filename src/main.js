@@ -5,8 +5,14 @@ let vm = new fnVue({
     data() {
         return {
             aa: {
-                b: 3222222222222
+                b: 3222222222222,
+                c: 22
             }
+        }
+    },
+    computed: {
+        bb() {
+            return 1
         }
     }
 })
