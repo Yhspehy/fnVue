@@ -1,5 +1,6 @@
-import Compile from './Compile.js'
 import { observe } from './Observe.js'
+import initComputed from './Computed'
+import Compile from './Compile.js'
 
 const fnVue = function(options = {}) {
     if (!options || typeof options !== 'object') {
@@ -13,10 +14,12 @@ const fnVue = function(options = {}) {
 
     this.$opitions = options
     this.data = options.data()
-    this.computed = options.computed || {}
+    this.computed = {}
 
     //监听数据
     observe(this.data)
+
+    initComputed(this)
 
     // 编译模板
     Compile(options.el, this)

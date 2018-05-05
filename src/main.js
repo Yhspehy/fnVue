@@ -12,9 +12,17 @@ let vm = new fnVue({
     },
     computed: {
         bb() {
-            return 1
+            return this.data.aa.b
         }
     }
 })
 
 console.log(vm)
+
+function pp() {
+    return this.a.c + this.b
+}
+
+let match = pp.toString().match(/(this\..*)\s/)
+
+console.log(match)
