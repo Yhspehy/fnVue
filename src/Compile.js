@@ -6,7 +6,8 @@ function Compile(el, vm) {
 
     // 创建一个DocumentFragment对象
     let fragment = document.createDocumentFragment(),
-        child
+        child,
+        isStringPattern = /[\D]/g
 
     // 为什么可以依次append元素
     // 具体原理我也不是很清楚
@@ -28,7 +29,7 @@ function Compile(el, vm) {
             if (node.nodeType === 3 && reg.test(txt)) {
                 function replaceTxt() {
                     node.textContent = txt.replace(reg, (matched, expList) => {
-                        new Watcher(vm, expList, node, newVal => {
+                        new Watcher(vm, expList, node, () => {
                             node.textContent = txt
                                 .replace(reg, (matched, expList) => {
                                     return expList
@@ -58,11 +59,23 @@ function Compile(el, vm) {
 
                         // v-model的情况
                         if (name === 'v-model') {
-                            new Watcher(vm, exp, node, newVal => {
-                                node.value = newVal
+                            node.value = expArr.reduce(
+                                (val, key) => val[key],
+                                vm
+                            )
+                            new Watcher(vm, exp, node, () => {
+                                node.value = expArr.reduce(
+                                    (val, key) => val[key],
+                                    vm
+                                )
                             })
                             node.addEventListener('input', e => {
-                                let newVal = e.target.value
+                                // 判断输入的是number还是string
+                                let newVal = isStringPattern.test(
+                                    e.target.value
+                                )
+                                    ? e.target.value
+                                    : parseInt(e.target.value)
 
                                 // 依次查询并赋值
                                 // 这里不能直接vm[exp]

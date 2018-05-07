@@ -12,7 +12,7 @@ const fnVue = function(options = {}) {
         return
     }
 
-    this.$opitions = options
+    this.$options = options
     this.data = options.data()
     this.computed = {}
 

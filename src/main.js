@@ -5,24 +5,16 @@ let vm = new fnVue({
     data() {
         return {
             aa: {
-                b: 3222222222222,
+                b: 11,
                 c: 22
             }
         }
     },
     computed: {
         bb() {
-            return this.data.aa.b
+            return this.data.aa.b + this.data.aa.c
         }
     }
 })
 
 console.log(vm)
-
-function pp() {
-    return this.a.c + this.b
-}
-
-let match = pp.toString().match(/(this\..*)\s/)
-
-console.log(match)
