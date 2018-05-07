@@ -14,6 +14,18 @@ let vm = new fnVue({
         bb() {
             return this.data.aa.b + this.data.aa.c
         }
+    },
+    created() {
+        console.log('create')
+    },
+    mounted() {
+        console.log('mounted')
+    },
+    method: {
+        aa() {
+            console.log('method-aa')
+            this.data.aa.b = 33
+        }
     }
 })
 

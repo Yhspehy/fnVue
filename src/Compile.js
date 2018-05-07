@@ -57,7 +57,7 @@ function Compile(el, vm) {
                         let exp = attr.value
                         let expArr = exp.split('.')
 
-                        // v-model的情况
+                        // v-model双向绑定
                         if (name === 'v-model') {
                             node.value = expArr.reduce(
                                 (val, key) => val[key],
@@ -72,10 +72,10 @@ function Compile(el, vm) {
                             node.addEventListener('input', e => {
                                 // 判断输入的是number还是string
                                 let newVal = isStringPattern.test(
-                                    e.target.value
-                                )
-                                    ? e.target.value
-                                    : parseInt(e.target.value)
+                                        e.target.value
+                                    ) ?
+                                    e.target.value :
+                                    parseInt(e.target.value)
 
                                 // 依次查询并赋值
                                 // 这里不能直接vm[exp]
@@ -87,6 +87,13 @@ function Compile(el, vm) {
                                         value[e] = newVal
                                     }
                                 })
+                            })
+                        }
+
+                        // click事件绑定
+                        if (name === '@click') {
+                            node.addEventListener('click', e => {
+                                vm.method[exp].bind(vm)()
                             })
                         }
                     })
