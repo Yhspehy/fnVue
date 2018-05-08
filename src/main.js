@@ -26,6 +26,12 @@ let vm = new fnVue({
             console.log('method-aa')
             this.data.aa.b = 33
         }
+    },
+    watch: {
+        'aa.b': function (val) {
+            console.log(val)
+            this.data.aa.c = 44
+        }
     }
 })
 

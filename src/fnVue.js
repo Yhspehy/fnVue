@@ -3,6 +3,7 @@ import {
 } from './Observe.js'
 import initComputed from './Computed'
 import Compile from './Compile.js'
+import Watch from './Watch.js'
 
 const fnVue = function (options = {}) {
     if (!options || typeof options !== 'object') {
@@ -33,6 +34,8 @@ const fnVue = function (options = {}) {
 
     // 执行mounted
     if (options.mounted) options.mounted.call(this)
+
+    if (options.watch) Watch(this, options)
 }
 
 export default fnVue

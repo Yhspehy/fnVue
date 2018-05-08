@@ -16,8 +16,11 @@ function Watcher(vm, exp, node, fn) {
     Dep.target = null
 }
 
-Watcher.prototype.update = function() {
-    this.fn()
+Watcher.prototype.update = function () {
+    let newVal = this.exp.split('.').reduce((val, key) => {
+        return val[key]
+    }, this.vm)
+    this.fn(newVal)
 }
 
 export default Watcher
