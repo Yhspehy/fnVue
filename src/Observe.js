@@ -1,10 +1,8 @@
 import Dep from './Dep.js'
-
 export function observe(data) {
     if (!data || typeof data !== 'object') return
     return new Observe(data)
 }
-
 export function Observe(data) {
     if (!data) return
     let dep = new Dep()

@@ -1,38 +1,10 @@
-import fnVue from './fnVue'
+import build from './buildNewVm'
 
-let vm = new fnVue({
-    el: '#app',
-    data() {
-        return {
-            aa: {
-                b: 11,
-                c: 22
-            }
-        }
-    },
-    computed: {
-        bb() {
-            return this.data.aa.b + this.data.aa.c
-        }
-    },
-    created() {
-        console.log('create')
-    },
-    mounted() {
-        console.log('mounted')
-    },
-    method: {
-        aa() {
-            console.log('method-aa')
-            this.data.aa.b = 33
-        }
-    },
-    watch: {
-        'aa.b': function (val) {
-            console.log(val)
-            this.data.aa.c = 44
-        }
-    }
-})
+if (module.hot) {
+    module.hot.accept('./buildNewVm.js', () => {
+        console.log(22);
+        build()
+    })
+}
 
-console.log(vm)
+build()

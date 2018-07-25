@@ -14,23 +14,23 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     mode: 'development',
     devtool: config.dev.devtool,
     devServer: {
+        inline: true,
         clientLogLevel: 'warning',
         hot: true, // 启动热加载
         compress: true, // 启动gzip压缩
         host: HOST || config.dev.host,
         port: PORT || config.dev.port,
         open: config.dev.autoOpenBrowser,
+        noInfo: false,
         quiet: true, // 初始启动信息之外的任何内容都不会被打印到控制台
-        overlay: config.dev.errorOverlay
-            ? {
-                  warnings: false,
-                  errors: true
-              }
-            : false
+        overlay: config.dev.errorOverlay ? {
+            warnings: false,
+            errors: true
+        } : false
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
         new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.
+        new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
             title: 'fnVue',
             filename: 'index.html',
@@ -50,9 +50,8 @@ module.exports = new Promise((resolve, reject) => {
                     }:${devWebpackConfig.devServer.port}`
                 ]
             },
-            onErrors: config.dev.notifyOnErrors
-                ? utils.createNotifierCallback()
-                : undefined
+            onErrors: config.dev.notifyOnErrors ?
+                utils.createNotifierCallback() : undefined
         })
     )
     resolve(devWebpackConfig)
