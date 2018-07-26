@@ -13,6 +13,7 @@ function initComputed(vm) {
         let exp = computed[key].toString()
         let match = exp.match(/this\.(.*?)[\s;]/g)
 
+
         // 将computed中的this绑定到vm实例中
         computed[key] = computed[key].bind(vm)
 

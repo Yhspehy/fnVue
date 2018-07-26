@@ -1,13 +1,13 @@
 import fnVue from './fnVue'
 
 export default function build() {
-    new fnVue({
+    let vm = new fnVue({
         el: '#app',
         data() {
             return {
                 aa: {
-                    b: 112,
-                    c: 2
+                    b: 1122,
+                    c: 12
                 }
             }
         },
@@ -35,4 +35,6 @@ export default function build() {
             }
         }
     })
+
+    return vm
 }

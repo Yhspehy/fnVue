@@ -5,6 +5,7 @@ const config = require('../config')
 const path = require('path')
 const baseWebpackConfig = require('./webpack.base.conf.js')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 
 const HOST = process.env.HOST
@@ -29,14 +30,15 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         } : false
     },
     plugins: [
-        new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.
-        new webpack.HotModuleReplacementPlugin(),
+        new CleanWebpackPlugin(['dist']),
         new HtmlWebpackPlugin({
             title: 'fnVue',
             filename: 'index.html',
             template: 'index.html',
             inject: true
-        })
+        }),
+        new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.
+        new webpack.HotModuleReplacementPlugin()
     ]
 })
 

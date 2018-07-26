@@ -20,20 +20,19 @@ module.exports = {
     },
     module: {
         rules: [
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                loader: 'babel-loader',
+            // {
+            //     test: /\.js$/,
+            //     exclude: /node_modules/,
+            //     loader: 'babel-loader',
 
-                options: {
-                    presets: ['env']
-                }
-            },
+            //     options: {
+            //         presets: ['env']
+            //     }
+            // },
             {
                 test: /\.(scss|css)$/,
 
-                use: [
-                    {
+                use: [{
                         loader: 'style-loader'
                     },
                     {
@@ -71,7 +70,7 @@ module.exports = {
         ]
     },
 
-    plugins: [new UglifyJSPlugin()],
+    // plugins: [new UglifyJSPlugin()],
 
     optimization: {
         splitChunks: {

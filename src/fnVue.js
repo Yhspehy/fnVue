@@ -14,6 +14,31 @@ const fnVue = function (options = {}) {
         console.error('options.data is not a function')
         return
     }
+    if (window.fnVue) {
+        let n_data = options.data()
+        let o_data = window.fnVue.data
+
+
+        function compare_data(data, old) {
+            try {
+                for (let key in data) {
+                    if (typeof data[key] === 'object') {
+                        compare_data(data[key], old[key])
+                        return
+                    }
+                    // if (Object.prototype.toString.call(data[key]) === '[Object Array]') {
+                    //     return
+                    // }
+                    if (data[key] !== old[key]) old[key] = data[key]
+                }
+            } catch (error) {
+                console.error(error);
+            }
+
+        }
+        compare_data(n_data, o_data)
+        return
+    }
 
     this.$options = options
     this.data = options.data()
@@ -36,6 +61,8 @@ const fnVue = function (options = {}) {
     if (options.mounted) options.mounted.call(this)
 
     if (options.watch) Watch(this, options)
+
+    window.fnVue = this
 }
 
 export default fnVue

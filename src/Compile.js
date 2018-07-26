@@ -5,6 +5,7 @@ function Compile(el, vm) {
     vm.$el = document.querySelector(el)
 
 
+
     // 创建一个DocumentFragment对象
     let fragment = document.createDocumentFragment(),
         child,
